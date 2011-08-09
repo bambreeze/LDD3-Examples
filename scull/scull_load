@@ -1,0 +1,17 @@
+#!/bin/sh
+cd /lib/modules
+insmod scull.ko
+
+cat /proc/devices | grep scull
+
+mknod -m 666 /dev/scull0 c 254 0
+mknod -m 666 /dev/scull1 c 254 1
+mknod -m 666 /dev/scull2 c 254 2
+mknod -m 666 /dev/scull3 c 254 3
+
+mknod -m 666 /dev/scullpipe0 c 254 4
+mknod -m 666 /dev/scullpipe1 c 254 5
+mknod -m 666 /dev/scullpipe2 c 254 6
+mknod -m 666 /dev/scullpipe3 c 254 7
+
+ls /dev | grep scull
