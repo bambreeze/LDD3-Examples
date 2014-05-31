@@ -1,9 +1,16 @@
-PWD := $(shell pwd)
-KERNELDIR = /home/bambreeze/workspace/ldd6410-read-only/linux-2.6.31
-INSTALLDIR = /home/bambreeze/workspace/skyeye/initrd/lib/modules
+# Comment/uncomment the following line to enable/disable for skyeye
+SKYEYE = y
 
-CROSS_COMPILE   = arm-linux-
-CC      = $(CROSS_COMPILE)gcc
+PWD := $(shell pwd)
+ifeq ($(SKYEYE),y)
+    KERNELDIR = ~/workspace/ldd6410-read-only/linux-2.6.31
+    INSTALLDIR = ~/workspace/skyeye/initrd/lib/modules
+
+    CROSS_COMPILE   = arm-linux-
+    CC      = $(CROSS_COMPILE)gcc
+else
+    KERNELDIR ?= /lib/modules/$(shell uname -r)/build
+endif
 
 obj-m := hello.o
 
